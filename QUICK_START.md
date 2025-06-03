@@ -51,6 +51,15 @@ node examples/integration.js
 
 ### As a Dependency
 
+First, install the package (since it's not on npm yet):
+
+```bash
+# From GitHub
+npm install https://github.com/yourusername/chrome-console-capture.git
+```
+
+Then use it in your code:
+
 ```javascript
 const ChromeConsoleCapture = require('chrome-console-capture');
 
@@ -69,8 +78,11 @@ async function captureMyApp() {
 ### Global CLI Installation
 
 ```bash
-# Install globally
+# From the chrome-console-capture directory
 npm install -g .
+
+# Or using npm link
+npm link
 
 # Use anywhere
 chrome-console-capture https://myapp.com
@@ -100,18 +112,6 @@ capture.onMessage(msg => {
     process.exit(1);
   }
 });
-```
-
-## Publishing to NPM
-
-When ready to publish:
-
-```bash
-# Update version
-npm version patch
-
-# Publish to NPM
-npm publish
 ```
 
 ## Need Help?

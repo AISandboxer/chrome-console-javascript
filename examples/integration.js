@@ -1,6 +1,9 @@
 /**
  * Integration example: Using chrome-console-capture in a testing scenario
  * This example shows how to integrate console capture into your test suite
+ * 
+ * Note: Since the package is not on npm yet, install it with:
+ * npm install https://github.com/yourusername/chrome-console-capture.git
  */
 
 const ChromeConsoleCapture = require('../index');

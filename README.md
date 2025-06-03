@@ -16,14 +16,41 @@ A powerful npm package for capturing and streaming Chrome DevTools console outpu
 
 ## Installation
 
+Since this package is not yet published to npm, you can install it from the local directory or GitHub. For detailed installation instructions, see [INSTALL.md](INSTALL.md).
+
+
+### Install from GitHub
+
 ```bash
-npm install chrome-console-capture
+# Install directly from GitHub
+npm install https://github.com/yourusername/chrome-console-capture.git
+
+# Or using a specific branch/tag
+npm install https://github.com/yourusername/chrome-console-capture.git#main
 ```
 
-Or install globally for CLI usage:
+### Install from Local Directory
 
 ```bash
-npm install -g chrome-console-capture
+# Clone the repository
+git clone https://github.com/yourusername/chrome-console-capture.git
+cd chrome-console-capture
+
+# Install dependencies
+npm install
+
+# Link the package locally
+npm link
+```
+
+### Global CLI Installation (from local)
+
+```bash
+# From the package directory
+npm install -g .
+
+# Or link globally
+npm link
 ```
 
 ## Quick Start
@@ -304,6 +331,30 @@ const capture = new ChromeConsoleCapture({
   browserArgs: ['--no-sandbox']
 });
 ```
+
+## Preparing for npm Publication
+
+Before publishing to npm, make sure to:
+
+1. Update the GitHub repository URLs in `package.json`:
+   ```json
+   "repository": {
+     "type": "git",
+     "url": "https://github.com/YOUR_USERNAME/chrome-console-capture.git"
+   },
+   "bugs": {
+     "url": "https://github.com/YOUR_USERNAME/chrome-console-capture/issues"
+   },
+   "homepage": "https://github.com/YOUR_USERNAME/chrome-console-capture#readme"
+   ```
+
+2. Set the author field in `package.json`
+
+3. Create an npm account at https://www.npmjs.com/
+
+4. Login to npm: `npm login`
+
+5. Publish: `npm publish`
 
 ## Contributing
 
