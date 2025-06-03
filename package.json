@@ -1,5 +1,5 @@
 {
-  "name": "chrome-console-capture",
+  "name": "chrome-console",
   "version": "1.0.0",
   "description": "Combine Chrome DevTools console output with your dev process output",
   "main": "index.js",

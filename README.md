@@ -1,4 +1,4 @@
-# chrome-console-capture
+# chrome-console
 
 A dead simple npm package that combines Chrome DevTools console output with your dev process output. Perfect for debugging web applications during development.
 
@@ -67,15 +67,14 @@ npm run dev:console
 
 ## Output Format
 
-The output is color-coded and prefixed for easy identification:
+The Chrome console output is color-coded and prefixed for easy identification:
 
-- `[DEV]` - Output from your dev process (gray)
-- `[DEV ERROR]` - Error output from your dev process (red)
-- `[CHROME LOG]` - console.log() from Chrome (white)
-- `[CHROME ERROR]` - console.error() from Chrome (red)
-- `[CHROME WARN]` - console.warn() from Chrome (yellow)
-- `[CHROME INFO]` - console.info() from Chrome (blue)
-- `[CHROME DEBUG]` - console.debug() from Chrome (gray)
+- Dev process output appears unmodified (stdout in default color, stderr in red)
+- `[CHROME CONSOLE LOG]` - console.log() from Chrome (white)
+- `[CHROME CONSOLE ERROR]` - console.error() from Chrome (red)
+- `[CHROME CONSOLE WARN]` - console.warn() from Chrome (yellow)
+- `[CHROME CONSOLE INFO]` - console.info() from Chrome (blue)
+- `[CHROME CONSOLE DEBUG]` - console.debug() from Chrome (gray)
 
 ## Example Output
 
@@ -83,10 +82,10 @@ The output is color-coded and prefixed for easy identification:
 🚀 Starting chrome-console...
 📦 Executing: npm run dev
 ⏳ Waiting 2000ms for dev server to start...
-[DEV] > my-app@1.0.0 dev
-[DEV] > vite
-[DEV] VITE v4.4.5  ready in 320 ms
-[DEV] ➜  Local:   http://localhost:5173/
+> my-app@1.0.0 dev
+> vite
+VITE v4.4.5  ready in 320 ms
+➜  Local:   http://localhost:5173/
 🌐 Launching Chrome...
 ✅ Chrome DevTools Protocol connected
 🔗 Navigating to http://localhost:5173

@@ -1,6 +1,6 @@
 # Chrome Console Example
 
-This is a simple example demonstrating how to use `chrome-console-capture` with a web application.
+This is a simple example demonstrating how to use `chrome-console` with a web application.
 
 ## Running the Example
 
