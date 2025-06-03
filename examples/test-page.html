@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome Console Capture Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .output {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chrome Console Capture Test Page</h1>
+    <p>This page generates various console outputs to test the chrome-console-capture package.</p>
+    
+    <div class="controls">
+        <button onclick="testBasicLogs()">Test Basic Logs</button>
+        <button onclick="testObjects()">Test Objects</button>
+        <button onclick="testErrors()">Test Errors</button>
+        <button onclick="testTimers()">Test Timers</button>
+        <button onclick="testGroups()">Test Groups</button>
+        <button onclick="testTable()">Test Table</button>
+        <button onclick="testAssertions()">Test Assertions</button>
+        <button onclick="startAutoLog()">Start Auto Log</button>
+        <button onclick="stopAutoLog()">Stop Auto Log</button>
+    </div>
+
+    <div class="output" id="output">
+        Click the buttons above to generate console output.
+    </div>
+
+    <script>
+        let autoLogInterval = null;
+        let logCount = 0;
+
+        // Initial console messages
+        console.log('Test page loaded successfully!');
+        console.info('Chrome Console Capture Test Page');
+        console.debug('Debug mode enabled');
+
+        function updateOutput(text) {
+            document.getElementById('output').textContent = text;
+        }
+
+        function testBasicLogs() {
+            console.log('This is a basic log message');
+            console.info('This is an info message');
+            console.warn('This is a warning message');
+            console.error('This is an error message');
+            console.debug('This is a debug message');
+            updateOutput('Basic log types tested - check console');
+        }
+
+        function testObjects() {
+            const person = {
+                name: 'John Doe',
+                age: 30,
+                address: {
+                    street: '123 Main St',
+                    city: 'Anytown',
+                    country: 'USA'
+                },
+                hobbies: ['reading', 'coding', 'gaming']
+            };
+            
+            console.log('Person object:', person);
+            console.dir(person);
+            
+            const array = [1, 2, 3, { nested: true }, 'string', null, undefined];
+            console.log('Mixed array:', array);
+            
+            const map = new Map([['key1', 'value1'], ['key2', 'value2']]);
+            console.log('Map object:', map);
+            
+            const set = new Set([1, 2, 3, 3, 4]);
+            console.log('Set object:', set);
+            
+            updateOutput('Object logging tested - check console');
+        }
+
+        function testErrors() {
+            console.error('Simple error message');
+            
+            try {
+                throw new Error('This is a thrown error with stack trace');
+            } catch (e) {
+                console.error('Caught error:', e);
+            }
+            
+            // Trigger a reference error
+            try {
+                nonExistentFunction();
+            } catch (e) {
+                console.error('Reference error:', e);
+            }
+            
+            // Test error with custom properties
+            const customError = new Error('Custom error');
+            customError.code = 'ERR_CUSTOM';
+            customError.details = { timestamp: new Date(), severity: 'high' };
+            console.error('Custom error with properties:', customError);
+            
+            updateOutput('Error logging tested - check console');
+        }
+
+        function testTimers() {
+            console.time('timer1');
+            console.time('timer2');
+            
+            setTimeout(() => {
+                console.timeLog('timer1', 'First checkpoint');
+                
+                setTimeout(() => {
+                    console.timeEnd('timer1');
+                    console.timeEnd('timer2');
+                    updateOutput('Timer logging completed - check console');
+                }, 500);
+            }, 1000);
+            
+            updateOutput('Timer logging started - wait 1.5 seconds');
+        }
+
+        function testGroups() {
+            console.group('Main Group');
+            console.log('Message in main group');
+            
+            console.group('Nested Group');
+            console.log('Message in nested group');
+            console.warn('Warning in nested group');
+            console.groupEnd();
+            
+            console.log('Back to main group');
+            console.groupEnd();
+            
+            console.groupCollapsed('Collapsed Group');
+            console.log('Message in collapsed group');
+            console.info('Info in collapsed group');
+            console.groupEnd();
+            
+            updateOutput('Group logging tested - check console');
+        }
+
+        function testTable() {
+            const data = [
+                { name: 'Alice', age: 25, city: 'New York' },
+                { name: 'Bob', age: 30, city: 'Los Angeles' },
+                { name: 'Charlie', age: 35, city: 'Chicago' }
+            ];
+            
+            console.table(data);
+            console.table(data, ['name', 'age']);
+            
+            updateOutput('Table logging tested - check console');
+        }
+
+        function testAssertions() {
+            console.assert(true, 'This assertion should not appear');
+            console.assert(false, 'This assertion should appear');
+            console.assert(1 === 2, 'Math assertion failed:', 1, '!==', 2);
+            
+            console.count('test-counter');
+            console.count('test-counter');
+            console.count('test-counter');
+            console.countReset('test-counter');
+            console.count('test-counter');
+            
+            updateOutput('Assertion and counter logging tested - check console');
+        }
+
+        function startAutoLog() {
+            if (autoLogInterval) {
+                console.warn('Auto logging already running');
+                return;
+            }
+            
+            console.log('Starting auto logging...');
+            autoLogInterval = setInterval(() => {
+                logCount++;
+                const types = ['log', 'info', 'warn', 'debug'];
+                const type = types[Math.floor(Math.random() * types.length)];
+                console[type](`Auto log #${logCount} - Type: ${type} - Time: ${new Date().toLocaleTimeString()}`);
+            }, 2000);
+            
+            updateOutput('Auto logging started - generates a log every 2 seconds');
+        }
+
+        function stopAutoLog() {
+            if (autoLogInterval) {
+                clearInterval(autoLogInterval);
+                autoLogInterval = null;
+                console.log('Auto logging stopped');
+                updateOutput('Auto logging stopped');
+            } else {
+                console.warn('Auto logging is not running');
+                updateOutput('Auto logging was not running');
+            }
+        }
+
+        // Test various console methods on page load
+        console.log('%cStyled console message', 'color: blue; font-size: 16px; font-weight: bold;');
+        console.log('Multiple', 'arguments', 'in', 'one', 'call', { with: 'object' }, [1, 2, 3]);
+        
+        // Create some async errors
+        setTimeout(() => {
+            console.warn('Delayed warning after 3 seconds');
+        }, 3000);
+        
+        // Test console.trace
+        function traceTest() {
+            console.trace('Trace test');
+        }
+        traceTest();
+    </script>
+</body>
+</html> 

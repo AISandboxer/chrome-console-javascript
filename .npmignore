@@ -1,0 +1,25 @@
+# Test files
+examples/console-output.log
+examples/*.log
+
+# Development files
+.gitignore
+.eslintrc
+.prettierrc
+
+# CI/CD
+.travis.yml
+.github/
+
+# Documentation sources
+docs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db 
