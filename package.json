@@ -1,0 +1,38 @@
+{
+  "name": "chrome-console-capture",
+  "version": "1.0.0",
+  "description": "Combine Chrome DevTools console output with your dev process output",
+  "main": "index.js",
+  "bin": {
+    "chrome-console": "./bin/chrome-console.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chrome",
+    "console",
+    "devtools",
+    "debugging",
+    "development"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/chrome-console-capture.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/chrome-console-capture/issues"
+  },
+  "homepage": "https://github.com/yourusername/chrome-console-capture#readme",
+  "dependencies": {
+    "chrome-remote-interface": "^0.33.0",
+    "puppeteer": "^22.8.2",
+    "yargs": "^17.7.2",
+    "chalk": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 

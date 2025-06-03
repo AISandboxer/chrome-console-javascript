@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome Console Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0.25rem;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .error-btn {
+            background: #dc3545;
+        }
+        .error-btn:hover {
+            background: #c82333;
+        }
+        .warn-btn {
+            background: #ffc107;
+            color: #333;
+        }
+        .warn-btn:hover {
+            background: #e0a800;
+        }
+        .info-btn {
+            background: #17a2b8;
+        }
+        .info-btn:hover {
+            background: #138496;
+        }
+        .output {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-family: monospace;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Chrome Console Demo</h1>
+        <p>This demo shows how chrome-console captures console output from the browser.</p>
+        
+        <h2>Test Console Methods</h2>
+        <button onclick="testLog()">console.log()</button>
+        <button onclick="testInfo()" class="info-btn">console.info()</button>
+        <button onclick="testWarn()" class="warn-btn">console.warn()</button>
+        <button onclick="testError()" class="error-btn">console.error()</button>
+        <button onclick="testDebug()">console.debug()</button>
+        <button onclick="testMultipleArgs()">Multiple Arguments</button>
+        <button onclick="testObjects()">Objects & Arrays</button>
+        <button onclick="throwError()" class="error-btn">Throw Error</button>
+        
+        <h2>Automatic Console Output</h2>
+        <div class="output" id="output">
+            Check your terminal to see the combined output!
+        </div>
+    </div>
+
+    <script>
+        // Log on page load
+        console.log('🎉 Chrome Console Demo loaded!');
+        console.info('This is an info message from the demo app');
+        
+        // Test functions
+        function testLog() {
+            console.log('This is a regular log message');
+            updateOutput('Sent: console.log()');
+        }
+        
+        function testInfo() {
+            console.info('This is an info message with useful information');
+            updateOutput('Sent: console.info()');
+        }
+        
+        function testWarn() {
+            console.warn('This is a warning message - something might be wrong');
+            updateOutput('Sent: console.warn()');
+        }
+        
+        function testError() {
+            console.error('This is an error message - something went wrong!');
+            updateOutput('Sent: console.error()');
+        }
+        
+        function testDebug() {
+            console.debug('This is a debug message with detailed information');
+            updateOutput('Sent: console.debug()');
+        }
+        
+        function testMultipleArgs() {
+            console.log('Multiple', 'arguments', 'test:', 123, true, null, undefined);
+            updateOutput('Sent: Multiple arguments to console.log()');
+        }
+        
+        function testObjects() {
+            const obj = { name: 'Test Object', value: 42, nested: { key: 'value' } };
+            const arr = [1, 2, 3, 'four', { five: 5 }];
+            console.log('Object:', obj);
+            console.log('Array:', arr);
+            updateOutput('Sent: Object and Array to console.log()');
+        }
+        
+        function throwError() {
+            updateOutput('Throwing an error...');
+            throw new Error('This is an uncaught error!');
+        }
+        
+        function updateOutput(message) {
+            const output = document.getElementById('output');
+            output.innerHTML += message + '<br>';
+        }
+        
+        // Periodic console output
+        let counter = 0;
+        setInterval(() => {
+            console.log(`Periodic message #${++counter} at ${new Date().toLocaleTimeString()}`);
+        }, 5000);
+        
+        // Log different types
+        setTimeout(() => {
+            console.log('String:', 'Hello World');
+            console.log('Number:', 42);
+            console.log('Boolean:', true);
+            console.log('Null:', null);
+            console.log('Undefined:', undefined);
+        }, 1000);
+    </script>
+</body>
+</html> 

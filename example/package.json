@@ -1,0 +1,12 @@
+{
+  "name": "chrome-console-example",
+  "version": "1.0.0",
+  "description": "Example app demonstrating chrome-console usage",
+  "scripts": {
+    "dev": "npx http-server . -p 8080",
+    "dev:console": "node ../bin/chrome-console.js --url http://localhost:8080 --execute \"npm run dev\""
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+} 
